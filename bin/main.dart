@@ -1,5 +1,23 @@
-import 'package:dart_level_4/dart_level_4.dart' as dart_level_4;
+import 'dart:async';
 
-void main(List<String> arguments) {
-  print('Hello world: ${dart_level_4.calculate()}!');
+void main() async{
+
+  var controller = StreamController();
+
+  controller.stream.listen((value){
+
+    if(value.toString().length > 5)
+    {
+      print('valid dat');
+    }else {
+      print('not valid');
+    }
+
+  });
+
+  controller.sink.add('wel');
+
+  await controller.sink.close();
+
+  controller.sink.add('welcome');
 }
