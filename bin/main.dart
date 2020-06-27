@@ -1,23 +1,33 @@
-import 'dart:async';
+import 'dart:io';
 
 void main() async{
+  
+  var file = File('data.txt');
 
-  var controller = StreamController();
+  if(await file.exists())
+  {
 
-  controller.stream.listen((value){
+    print('file found');
 
-    if(value.toString().length > 5)
-    {
-      print('valid dat');
-    }else {
-      print('not valid');
-    }
+    //file.deleteSync();
 
-  });
+    //var filedata = file.readAsStringSync();
 
-  controller.sink.add('wel');
+    //print(filedata);
 
-  await controller.sink.close();
+    //file.copySync('data2.txt');
 
-  controller.sink.add('welcome');
+    await file.delete().then((value){
+      print('file deleted successfully');
+    });
+
+  }else{
+
+    file.createSync();
+
+    file.writeAsStringSync('welcome from file instance lessons');
+
+  }
+
+
 }
